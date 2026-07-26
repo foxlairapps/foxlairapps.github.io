@@ -4,20 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Foxlair Studio</title>
-  <meta name="description" content="Foxlair Studio tvoří originální aplikace a hry propojující příběhy, rozhodování a skutečný svět.">
-  <meta name="theme-color" content="#153c34">
+  <meta name="description" content="Foxlair Studio – nezávislé studio tvořící aplikace a hry.">
+  <meta name="theme-color" content="#f7f5ef">
   <style>
     :root {
-      --bg: #f6f1e6;
-      --panel: #fffdf8;
-      --panel-soft: #eef4e8;
-      --text: #17332d;
-      --muted: #66756f;
-      --accent: #386b4f;
-      --accent-2: #8eb66e;
-      --deep: #10372f;
-      --border: rgba(24, 61, 51, .16);
-      --shadow: 0 24px 80px rgba(16, 55, 47, .12);
+      --bg: #f7f5ef;
+      --surface: #fffdf8;
+      --text: #18362f;
+      --muted: #6d7773;
+      --accent: #4f785f;
+      --accent-soft: #eaf1e8;
+      --border: #dfe4de;
     }
 
     * { box-sizing: border-box; }
@@ -26,496 +23,226 @@
 
     body {
       margin: 0;
+      background: var(--bg);
       color: var(--text);
-      background:
-        radial-gradient(circle at 80% -10%, rgba(142, 182, 110, .28), transparent 38rem),
-        linear-gradient(180deg, #fbf8f0 0%, var(--bg) 100%);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.6;
     }
 
+    img { display: block; max-width: 100%; }
+
     a { color: inherit; }
 
-    .page {
-      min-height: 100vh;
-      overflow: hidden;
-    }
-
     .shell {
-      width: min(1160px, calc(100% - 40px));
+      width: min(920px, calc(100% - 32px));
       margin: 0 auto;
     }
 
     header {
-      padding: 30px 0;
+      padding: 34px 0 24px;
+      text-align: center;
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
+    .studio-logo {
+      width: min(280px, 74vw);
+      margin: 0 auto 18px;
     }
 
-    .studio-mark {
-      width: 54px;
-      height: 54px;
-      flex: 0 0 auto;
-      filter: drop-shadow(0 8px 16px rgba(16, 55, 47, .15));
-    }
-
-    .brand-name {
-      display: flex;
-      flex-direction: column;
+    .studio-name {
+      margin: 0;
+      font-size: clamp(2rem, 8vw, 3.6rem);
       line-height: 1;
+      letter-spacing: -.045em;
     }
 
-    .brand-name strong {
-      font-size: 1.18rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .brand-name span {
-      margin-top: 6px;
+    .studio-subtitle {
+      margin: 12px 0 0;
       color: var(--muted);
-      font-size: .78rem;
-      letter-spacing: .24em;
-      text-transform: uppercase;
+      font-size: 1rem;
     }
 
-    .hero {
+    .divider {
+      width: 72px;
+      height: 2px;
+      margin: 30px auto 0;
+      background: var(--accent);
+      opacity: .45;
+    }
+
+    main {
+      padding: 20px 0 64px;
+    }
+
+    .project {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: var(--surface);
+    }
+
+    .project-link {
       display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(330px, .95fr);
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 30px;
       align-items: center;
-      gap: 64px;
-      min-height: 530px;
-      padding: 70px 0 96px;
+      padding: 28px;
+      text-decoration: none;
+      transition: background .18s ease, transform .18s ease;
+    }
+
+    .project-link:hover {
+      background: #fbfcf8;
+    }
+
+    .project-link:focus-visible {
+      outline: 3px solid rgba(79, 120, 95, .35);
+      outline-offset: 4px;
+    }
+
+    .project-icon-wrap {
+      display: grid;
+      place-items: center;
+      min-height: 190px;
+      border-radius: 20px;
+      background: var(--accent-soft);
+    }
+
+    .project-icon {
+      width: 132px;
+      border-radius: 27%;
+      box-shadow: 0 18px 42px rgba(24, 54, 47, .16);
     }
 
     .eyebrow {
-      margin: 0 0 18px;
-      color: var(--accent);
-      font-size: .8rem;
-      font-weight: 750;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      max-width: 760px;
-      margin: 0;
-      font-size: clamp(3rem, 7vw, 6.4rem);
-      line-height: .96;
-      letter-spacing: -.055em;
-    }
-
-    .hero-copy {
-      max-width: 680px;
-      margin: 28px 0 0;
-      color: var(--muted);
-      font-size: clamp(1.04rem, 2vw, 1.22rem);
-    }
-
-    .hero-note {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 30px;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255, 253, 248, .72);
-      color: var(--deep);
-      font-size: .92rem;
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-note::before {
-      content: "";
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--accent-2);
-      box-shadow: 0 0 0 5px rgba(142, 182, 110, .18);
-    }
-
-    .hero-art {
-      position: relative;
-      min-height: 430px;
-    }
-
-    .orb {
-      position: absolute;
-      inset: 4% 2% 0 10%;
-      border-radius: 50% 50% 44% 56% / 56% 44% 56% 44%;
-      background:
-        radial-gradient(circle at 60% 30%, rgba(255,255,255,.75), transparent 20%),
-        linear-gradient(145deg, #c8dda4 0%, #7fab69 42%, #2d6852 100%);
-      box-shadow: var(--shadow);
-      transform: rotate(-6deg);
-    }
-
-    .path {
-      position: absolute;
-      left: 42%;
-      bottom: -4%;
-      width: 24%;
-      height: 78%;
-      border-radius: 100% 20% 90% 15%;
-      background: linear-gradient(180deg, #f9f1d7, #fffaf0);
-      transform: rotate(16deg);
-      clip-path: polygon(43% 0, 72% 16%, 42% 34%, 70% 50%, 34% 69%, 60% 100%, 15% 100%, 25% 69%, 5% 52%, 29% 34%, 17% 17%);
-      filter: drop-shadow(0 12px 8px rgba(16, 55, 47, .12));
-    }
-
-    .mountain {
-      position: absolute;
-      left: 20%;
-      bottom: 15%;
-      width: 64%;
-      height: 52%;
-      background: var(--deep);
-      clip-path: polygon(0 100%, 20% 53%, 33% 72%, 55% 15%, 72% 52%, 83% 35%, 100% 100%);
-      opacity: .98;
-    }
-
-    .sun {
-      position: absolute;
-      top: 17%;
-      left: 45%;
-      width: 112px;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: #fff4d0;
-      box-shadow: 0 0 70px rgba(255, 244, 208, .6);
-    }
-
-    .tree {
-      position: absolute;
-      bottom: 16%;
-      width: 74px;
-      height: 155px;
-      background: #174b3d;
-      clip-path: polygon(50% 0, 91% 44%, 70% 44%, 100% 79%, 61% 79%, 61% 100%, 39% 100%, 39% 79%, 0 79%, 30% 44%, 9% 44%);
-    }
-
-    .tree.one { left: 12%; transform: scale(.78); }
-    .tree.two { right: 7%; transform: scale(.92); }
-    .tree.three { right: 25%; transform: scale(.48); opacity: .8; }
-
-    .products {
-      padding: 88px 0 112px;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-head {
-      max-width: 760px;
-      margin-bottom: 42px;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(2rem, 4vw, 3.35rem);
-      letter-spacing: -.04em;
-    }
-
-    .section-head p {
-      margin: 14px 0 0;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-
-    .product-card {
-      display: grid;
-      grid-template-columns: minmax(250px, .72fr) minmax(0, 1.28fr);
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      background: var(--panel);
-      box-shadow: var(--shadow);
-    }
-
-    .product-visual {
-      position: relative;
-      display: grid;
-      min-height: 420px;
-      place-items: center;
-      padding: 56px;
-      background:
-        radial-gradient(circle at 60% 30%, rgba(255,255,255,.46), transparent 24%),
-        linear-gradient(145deg, #bcd88f, #39715a);
-    }
-
-    .product-visual::after {
-      content: "";
-      position: absolute;
-      inset: auto -12% -26% 18%;
-      height: 62%;
-      border-radius: 50%;
-      background: rgba(15, 56, 47, .28);
-      filter: blur(2px);
-    }
-
-    .product-icon {
-      position: relative;
-      z-index: 1;
-      width: min(260px, 82%);
-      border-radius: 23%;
-      box-shadow: 0 28px 70px rgba(10, 42, 35, .34);
-    }
-
-    .product-content {
-      padding: clamp(40px, 7vw, 80px);
-    }
-
-    .tag {
-      display: inline-block;
-      margin-bottom: 18px;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: var(--panel-soft);
+      margin: 0 0 8px;
       color: var(--accent);
       font-size: .78rem;
       font-weight: 750;
-      letter-spacing: .12em;
+      letter-spacing: .14em;
       text-transform: uppercase;
     }
 
-    .product-content h3 {
+    .project h2 {
       margin: 0;
-      font-size: clamp(2.4rem, 5vw, 4.7rem);
-      line-height: 1;
-      letter-spacing: -.055em;
+      font-size: clamp(2rem, 6vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -.04em;
     }
 
-    .product-lead {
-      margin: 22px 0 0;
-      color: var(--deep);
-      font-size: 1.24rem;
+    .project-lead {
+      margin: 14px 0 0;
+      color: var(--text);
+      font-size: 1.12rem;
       font-weight: 650;
     }
 
-    .product-description {
-      max-width: 690px;
-      margin: 16px 0 0;
+    .project-copy {
+      margin: 12px 0 0;
       color: var(--muted);
-      font-size: 1.02rem;
+      font-size: 1rem;
     }
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px 26px;
-      margin: 30px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .features li {
-      position: relative;
-      padding-left: 22px;
-      color: var(--deep);
-    }
-
-    .features li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: .68em;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent-2);
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 13px;
-      margin-top: 34px;
-    }
-
-    .button {
+    .project-more {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 20px;
-      border: 1px solid var(--deep);
-      border-radius: 999px;
-      color: var(--deep);
-      font-weight: 720;
-      text-decoration: none;
-      transition: transform .18s ease, background .18s ease, color .18s ease;
+      gap: 8px;
+      margin-top: 20px;
+      color: var(--accent);
+      font-weight: 700;
     }
 
-    .button.primary {
-      background: var(--deep);
-      color: #fffdf8;
+    .project-more::after {
+      content: "→";
+      transition: transform .18s ease;
     }
 
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    .button.primary:hover {
-      background: var(--accent);
+    .project-link:hover .project-more::after {
+      transform: translateX(4px);
     }
 
     footer {
-      padding: 32px 0 46px;
+      padding: 28px 0 34px;
       border-top: 1px solid var(--border);
       color: var(--muted);
-      font-size: .9rem;
+      font-size: .92rem;
+      text-align: center;
     }
 
-    .footer-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .footer-row a {
-      color: var(--deep);
+    footer a {
+      color: var(--text);
       text-decoration: none;
     }
 
-    @media (max-width: 860px) {
-      .hero {
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 680px) {
+      header {
+        padding-top: 24px;
+      }
+
+      .studio-logo {
+        width: min(230px, 72vw);
+      }
+
+      main {
+        padding-top: 10px;
+      }
+
+      .project-link {
         grid-template-columns: 1fr;
-        gap: 32px;
-        min-height: auto;
-        padding-top: 44px;
+        gap: 22px;
+        padding: 20px;
       }
 
-      .hero-art {
-        min-height: 360px;
+      .project-icon-wrap {
+        min-height: 210px;
       }
 
-      .product-card {
-        grid-template-columns: 1fr;
+      .project-icon {
+        width: 128px;
       }
 
-      .product-visual {
-        min-height: 330px;
+      .project-copy {
+        font-size: .97rem;
       }
-    }
-
-    @media (max-width: 560px) {
-      .shell { width: min(100% - 28px, 1160px); }
-      header { padding-top: 20px; }
-      .hero { padding-bottom: 70px; }
-      .hero-art { min-height: 290px; }
-      .sun { width: 82px; }
-      .tree { width: 54px; height: 116px; }
-      .features { grid-template-columns: 1fr; }
-      .product-content { padding: 34px 26px 42px; }
-      .product-visual { padding: 38px; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <div class="shell">
-        <a class="brand" href="/" aria-label="Foxlair Studio – domovská stránka">
-          <svg class="studio-mark" viewBox="0 0 64 64" role="img" aria-label="Symbol Foxlair Studio">
-            <defs>
-              <linearGradient id="markGradient" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#9fc77a"/>
-                <stop offset="1" stop-color="#275e4b"/>
-              </linearGradient>
-            </defs>
-            <rect width="64" height="64" rx="20" fill="url(#markGradient)"/>
-            <path d="M17 23 27 12l5 9 5-9 10 11-3 20-12 9-12-9-3-20Z" fill="#fff8e8"/>
-            <path d="M23 31c4 2 14 2 18 0-1 8-5 13-9 13s-8-5-9-13Z" fill="#16483b"/>
-            <circle cx="25" cy="29" r="2" fill="#16483b"/>
-            <circle cx="39" cy="29" r="2" fill="#16483b"/>
-          </svg>
-          <span class="brand-name">
-            <strong>Foxlair</strong>
-            <span>Studio</span>
-          </span>
-        </a>
-      </div>
-    </header>
+  <header class="shell">
+    <img class="studio-logo" src="assets/foxlair-logo.png" alt="Logo Foxlair Studio">
+    <h1 class="studio-name">Foxlair Studio</h1>
+    <p class="studio-subtitle">Nezávislé studio tvořící aplikace a hry.</p>
+    <div class="divider" aria-hidden="true"></div>
+  </header>
 
-    <main>
-      <section class="hero shell">
+  <main class="shell">
+    <section class="project" aria-labelledby="storywalker-title">
+      <a class="project-link" href="https://storywalker.foxlairstudio.com/">
+        <div class="project-icon-wrap">
+          <img class="project-icon" src="assets/storywalker-icon.png" alt="Ikona aplikace StoryWalker">
+        </div>
+
         <div>
-          <p class="eyebrow">Aplikace · hry · příběhy</p>
-          <h1>Nápady, které zvou dál.</h1>
-          <p class="hero-copy">
-            Foxlair Studio tvoří originální digitální projekty, ve kterých se propojují
-            příběhy, rozhodování a skutečný svět. Každý projekt začíná jednoduchou otázkou:
-            co kdyby aplikace nebyla jen nástroj, ale také cesta?
+          <p class="eyebrow">Interaktivní dobrodružství</p>
+          <h2 id="storywalker-title">StoryWalker</h2>
+          <p class="project-lead">Příběhy, které postupují spolu s tebou.</p>
+          <p class="project-copy">
+            StoryWalker propojuje interaktivní příběhy se skutečnou chůzí.
+            Čti, rozhoduj se, sbírej předměty, plň úkoly a odemykej další části
+            dobrodružství tím, že se opravdu vydáš na cestu.
           </p>
-          <div class="hero-note">Nezávislé vývojářské studio z České republiky</div>
+          <span class="project-more">Zjistit více</span>
         </div>
+      </a>
+    </section>
+  </main>
 
-        <div class="hero-art" aria-hidden="true">
-          <div class="orb"></div>
-          <div class="sun"></div>
-          <div class="mountain"></div>
-          <div class="path"></div>
-          <div class="tree one"></div>
-          <div class="tree two"></div>
-          <div class="tree three"></div>
-        </div>
-      </section>
-
-      <section class="products">
-        <div class="shell">
-          <div class="section-head">
-            <p class="eyebrow">Naše projekty</p>
-            <h2>StoryWalker</h2>
-            <p>První vydaný projekt Foxlair Studia.</p>
-          </div>
-
-          <article class="product-card">
-            <div class="product-visual">
-              <img class="product-icon" src="assets/storywalker-icon.png" alt="Ikona aplikace StoryWalker">
-            </div>
-
-            <div class="product-content">
-              <span class="tag">Interaktivní dobrodružství</span>
-              <h3>StoryWalker</h3>
-              <p class="product-lead">Příběhy, které postupují spolu s tebou.</p>
-              <p class="product-description">
-                StoryWalker propojuje interaktivní příběhy se skutečnou chůzí.
-                Čti, rozhoduj se, sbírej předměty, plň úkoly a odemykej další části
-                dobrodružství tím, že se opravdu vydáš na cestu.
-              </p>
-
-              <ul class="features">
-                <li>Příběhové volby a různé cesty</li>
-                <li>Postup založený na skutečné chůzi</li>
-                <li>Inventář, vlastnosti a úkoly</li>
-                <li>Import a tvorba vlastních dobrodružství</li>
-              </ul>
-
-              <div class="actions">
-                <a class="button primary" href="https://storywalker.foxlairstudio.com/">
-                  Stránka StoryWalkeru
-                </a>
-                <a class="button" href="mailto:foxlair.apps@gmail.com">
-                  Kontakt
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="shell footer-row">
-        <span>© 2026 Foxlair Studio</span>
-        <span><a href="mailto:foxlair.apps@gmail.com">foxlair.apps@gmail.com</a></span>
-      </div>
-    </footer>
-  </div>
+  <footer>
+    <div class="shell">
+      <div>© 2026 Foxlair Studio</div>
+      <div><a href="mailto:foxlair.apps@gmail.com">foxlair.apps@gmail.com</a></div>
+    </div>
+  </footer>
 </body>
 </html>
